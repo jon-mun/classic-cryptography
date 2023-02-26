@@ -1,6 +1,5 @@
 #include<iostream>
 #include"operation.h"
-#include"utils.h"
 #include"encrypt.h"
 using namespace std;
 
@@ -14,11 +13,6 @@ int main()
     cout << "Insert a text to encrypt" << endl;
     cin >> inputText;
 
-
-    // key = "}'/+-";
-    // // TODO never reaches 1*******
-    // inputText = "HelloWorld!";
-
     string encryptedText = encrypt(inputText, key);
     cout << "Encrypted Text: " << encryptedText << endl;
 
@@ -28,4 +22,4 @@ int main()
     return 0;
 }
 
-// g++ operation.cpp utils.cpp encrypt.cpp main.cpp -o main.out && ./main.out
+// g++ operation.cpp encrypt.cpp main.cpp -o main.out && ./main.out

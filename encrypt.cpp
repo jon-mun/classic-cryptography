@@ -1,30 +1,27 @@
 #include<iostream>
 #include"operation.h"
-#include"utils.h"
 
 using namespace std;
 
 string encrypt(string inputText, string key)
 {
-    // 0. convert key to 8 bit binary string
-    string binaryKey = asciiToBinary(key);
-
-    // 1. split key into 8 bit blocks
-    int blocks = binaryKey.length() / 8;
-    string key_blocks[blocks];
-    splitKeys(key_blocks, binaryKey, blocks);
-
+    int blocks = key.length();
     // 2. store operations on each block
     operationDetails operations[blocks];
     for (int i = 0; i < blocks; i++)
     {
-        // 2.1. get the first two bits
-        string operationBlock = key_blocks[i].substr(0, 2);
-        // 2.2. get the last 6 bits
-        string block = key_blocks[i].substr(2, 6);
-        // 2.3. convert the last 6 bits to decimal
-        int value = binaryToDecimal(block);
+        unsigned char block = key[i];
+        
+        // 2.1. get the last two bits
+        unsigned char operationBlock = block & 0b00000011;
+
+        // 2.2. get the first 6 bits
+        unsigned char valueBlock = block & 0b11111100;
+
+        // 2.3. get operation and value
+        int value = int(valueBlock);
         operation op = getOperation(operationBlock);
+
         // 2.4. store operation and value
         operations[i] = { op, value };
     }
@@ -45,25 +42,23 @@ string encrypt(string inputText, string key)
 
 string decrypt(string inputText, string key)
 {
-    // 0. convert key to 8 bit binary string
-    string binaryKey = asciiToBinary(key);
-
-    // 1. split key into 8 bit blocks
-    int blocks = binaryKey.length() / 8;
-    string key_blocks[blocks];
-    splitKeys(key_blocks, binaryKey, blocks);
-
+   int blocks = key.length();
     // 2. store operations on each block
     operationDetails operations[blocks];
     for (int i = 0; i < blocks; i++)
     {
-        // 2.1. get the first two bits
-        string operationBlock = key_blocks[i].substr(0, 2);
-        // 2.2. get the last 6 bits
-        string block = key_blocks[i].substr(2, 6);
-        // 2.3. convert the last 6 bits to decimal
-        int value = binaryToDecimal(block);
+        unsigned char block = key[i];
+        
+        // 2.1. get the last two bits
+        unsigned char operationBlock = block & 0b00000011;
+        
+        // 2.2. get the first 6 bits
+        unsigned char valueBlock = block & 0b11111100;
+        
+        // 2.3. get operation and value
+        int value = int(valueBlock);
         operation op = getOperation(operationBlock);
+        
         // 2.4. store operation and value
         operations[i] = { op, value };
     }

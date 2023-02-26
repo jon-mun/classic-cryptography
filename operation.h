@@ -16,6 +16,6 @@ struct operationDetails {
 };
 void operationEncryptController(operationDetails details, string& inputText, int index);
 void operationDecryptController(operationDetails details, string& inputText, int index);
-operation getOperation(string operationBlock);
+operation getOperation(unsigned char operationBlock);
 
 #endif
