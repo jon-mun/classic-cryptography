@@ -11,15 +11,15 @@ void operationEncryptController(operationDetails details, string& inputText, int
     {
     case SWAP:
         inputText = swapForward(inputText, index, value);
-        cout << inputText << " " << op << value << endl;
+        cout << inputText << " " << "SWAP" << " " << value << endl;
         break;
     case ADD:
         inputText[index] = (inputText[index] + value) % 256;
-        cout << inputText << endl;
+        cout << inputText << " " << "ADD" << " " << value << endl;
         break;
     case MULTIPLY:
         inputText[index] = (inputText[index] * value) % 256;
-        cout << inputText << endl;
+        cout << inputText << " " << "MULTIPLY" << " " << value << endl;
         break;
     default:
         break;
@@ -34,15 +34,15 @@ void operationDecryptController(operationDetails details, string& inputText, int
     {
     case SWAP:
         inputText = swapForward(inputText, index, value);
-        cout << inputText << " " << op << " " << value << endl;
+        cout << inputText << " " << "SWAP" << " " << value << endl;
         break;
     case ADD:
         inputText[index] = (inputText[index] - value) % 256;
-        cout << inputText << endl;
+        cout << inputText << " " << "ADD" << " " << value << endl;
         break;
     case MULTIPLY:
         inputText[index] = (inputText[index] / value) % 256;
-        cout << inputText << endl;
+        cout << inputText << " " << "MULTIPLY" << " " << value << endl;
         break;
     default:
         break;
@@ -52,17 +52,11 @@ void operationDecryptController(operationDetails details, string& inputText, int
 // function to enumerate operations
 operation getOperation(string operationBlock)
 {
-    /**
-     * operations:
-     * 0* -> swap
-     * 10 -> add
-     * 11 -> multiply
-    */
-    if (operationBlock == "00" || operationBlock == "01")
+    if (operationBlock == "00")
     {
         return SWAP;
     }
-    else if (operationBlock == "10")
+    else if (operationBlock == "01")
     {
         return ADD;
     }

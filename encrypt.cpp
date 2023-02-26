@@ -8,7 +8,6 @@ string encrypt(string inputText, string key)
 {
     // 0. convert key to 8 bit binary string
     string binaryKey = asciiToBinary(key);
-    cout << binaryKey << endl;
 
     // 1. split key into 8 bit blocks
     int blocks = binaryKey.length() / 8;
@@ -40,8 +39,7 @@ string encrypt(string inputText, string key)
             operationEncryptController(operations[i], encryptedText, j);
         }
     }
-    cout << encryptedText << endl;
-
+    
     return encryptedText;
 }
 
@@ -49,7 +47,6 @@ string decrypt(string inputText, string key)
 {
     // 0. convert key to 8 bit binary string
     string binaryKey = asciiToBinary(key);
-    cout << binaryKey << endl;
 
     // 1. split key into 8 bit blocks
     int blocks = binaryKey.length() / 8;
